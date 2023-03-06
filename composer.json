@@ -1,0 +1,56 @@
+{
+    "name": "anystack/wp-guard",
+    "description": "Automatic updates and license protection for your WordPress",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Anystack\\WpGuard\\VDEV\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Philo Hermans",
+            "email": "philo@anystack.sh"
+        }
+    ],
+    "require": {
+        "anystack-sh/php-sdk": "dev-main",
+        "brianhenryie/strauss": "^0.13.0"
+    },
+    "scripts": {
+        "prefix":  "vendor/bin/strauss"
+    },
+    "extra": {
+        "strauss": {
+            "target_directory": "vendor-prefixed",
+            "namespace_prefix": "Anystack\\WPGuard\\VDEV\\",
+            "classmap_prefix": "ANYSTACK_WP_GUARD_",
+            "constant_prefix": "ANYSTACK_WP_GUARD_",
+            "packages": [
+            ],
+            "override_autoload": {
+            },
+            "exclude_from_copy": {
+                "packages": [
+                ],
+                "namespaces": [
+                ],
+                "file_patterns": [
+                ]
+            },
+            "exclude_from_prefix": {
+                "packages": [
+                ],
+                "namespaces": [
+                ],
+                "file_patterns": [
+                    "/^psr.*$/"
+                ]
+            },
+            "namespace_replacement_patterns" : {
+            },
+            "delete_vendor_packages": false,
+            "delete_vendor_files": false
+        }
+    }
+}

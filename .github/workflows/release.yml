@@ -1,0 +1,28 @@
+name: Releases
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure PHP 8.1
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 8.1
+          extensions: mbstring, ctype, fileinfo, openssl, PDO, bcmath, json, tokenizer, xml
+      - name: Install Composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --no-dev --optimize-autoloader
+      - name: Run Straus
+        run: ./build.sh $GITHUB_REF_NAME
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "wp-guard.zip"
